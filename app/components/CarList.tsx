@@ -11,6 +11,9 @@ export default function CarList(props: { makeId: string; year: string }) {
 			modelName: string;
 		}[]
 	>([]);
+
+	const [error, setError] = useState<string>();
+
 	useEffect(() => {
 		fetch(
 			"https://vpic.nhtsa.dot.gov/api/vehicles/GetModelsForMakeIdYear/" +
@@ -33,21 +36,31 @@ export default function CarList(props: { makeId: string; year: string }) {
 						}),
 					),
 				),
-			);
+			)
+			.catch((err) => setError(err.message));
 	}, [props.makeId, props.year]);
 
 	return (
-		<div className="w-full">
-			<ul className="flex flex-wrap gap-4">
-				{models.map((v) => (
-					<li
-						key={v.modelId}
-						className="p-2 border-2 bg-slate-50 border-slate-50 shadow-md"
-					>
-						{`${v.makerName} ${v.modelName}`}
-					</li>
-				))}
-			</ul>
-		</div>
+		(!!error && (
+			<>
+				<p className="font-bold">
+					Sorry, there was an issue loading models. Please try again later.
+				</p>
+				<p className="text-red-500">Error: {error}</p>
+			</>
+		)) || (
+			<div className="w-full">
+				<ul className="flex flex-wrap gap-4">
+					{models.map((v) => (
+						<li
+							key={v.modelId}
+							className="p-2 border-2 bg-slate-50 border-slate-50 shadow-md"
+						>
+							{`${v.makerName} ${v.modelName}`}
+						</li>
+					))}
+				</ul>
+			</div>
+		)
 	);
 }
