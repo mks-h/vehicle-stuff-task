@@ -1,4 +1,4 @@
-import Dropdown from "./components/Dropdown.tsx";
+import CarFilter from "./components/CarFilter.tsx";
 
 const YEARS = [
 	{ value: 2015, label: 2015 },
@@ -13,7 +13,16 @@ const YEARS = [
 	{ value: 2024, label: 2024 },
 ];
 
-export default function Home() {
+export default async function Home() {
+	const data = await fetch(
+		"https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json",
+	);
+	const dataJson = await data.json();
+	const makers = dataJson.Results.map((v) => ({
+		value: v.MakeId,
+		label: v.MakeName,
+	}));
+
 	return (
 		<div
 			className="w-screen h-screen
@@ -25,24 +34,8 @@ export default function Home() {
 			bg-white border-2 border-slate-50 drop-shadow-lg"
 			>
 				<h1 className="text-4xl font-bold">Car Dealer App</h1>
-				<div className="flex gap-8">
-					<MakerDropdown />
-					<Dropdown name="makeYear" items={YEARS} label="Year" />
-				</div>
+				<CarFilter makers={makers} years={YEARS} />
 			</div>
 		</div>
 	);
-}
-
-async function MakerDropdown() {
-	const data = await fetch("https://vpic.nhtsa.dot.gov/api/vehicles/GetMakesForVehicleType/car?format=json");
-	const dataJson = await data.json();
-	const modelsMapped = dataJson.Results.map(v => ({
-		value: v.MakeId,
-		label: v.MakeName
-	}));
-
-	return (
-		<Dropdown name="makeName" items={modelsMapped} label="Maker" />
-	)
 }
