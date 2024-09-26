@@ -4,9 +4,7 @@ import { MAKERS, YEARS } from "./data.tsx";
 
 export default async function Home() {
 	return (
-		<div
-			className="w-screen h-screen flex justify-center items-center"
-		>
+		<div className="w-screen h-screen flex justify-center items-center">
 			<div
 				className="w-2/3 h-1/3 flex flex-col justify-center items-center gap-8
 			bg-white border-2 border-slate-50 drop-shadow-lg"
