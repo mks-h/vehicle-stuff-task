@@ -5,9 +5,7 @@ import { MAKERS, YEARS } from "./data.tsx";
 export default async function Home() {
 	return (
 		<div
-			className="w-screen h-screen
-		flex justify-center items-center
-		bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]"
+			className="w-screen h-screen flex justify-center items-center"
 		>
 			<div
 				className="w-2/3 h-1/3 flex flex-col justify-center items-center gap-8
