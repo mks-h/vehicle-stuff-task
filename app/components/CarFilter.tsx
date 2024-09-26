@@ -5,8 +5,8 @@ import Link from "next/link";
 import Dropdown, { type Item } from "./Dropdown.tsx";
 
 export default function CarFilter(props: { makers: Item[]; years: Item[] }) {
-	const [maker, setMaker] = useState();
-	const [year, setYear] = useState();
+	const [maker, setMaker] = useState<string>();
+	const [year, setYear] = useState<string>();
 
 	useEffect(() => {
 		console.log(`MAKER: ${maker} YEAR: ${year}`);
@@ -20,14 +20,14 @@ export default function CarFilter(props: { makers: Item[]; years: Item[] }) {
 					items={props.makers}
 					label="Maker"
 					placeholder="Choose Maker"
-					onChange={setMaker}
+					onChange={(v) => setMaker(v)}
 				/>
 				<Dropdown
 					name="makeYear"
 					items={props.years}
 					label="Year"
 					placeholder="Choose Year"
-					onChange={setYear}
+					onChange={(v) => setYear(v)}
 				/>
 			</div>
 			<div>

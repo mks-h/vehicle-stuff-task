@@ -12,7 +12,7 @@ export default function Dropdown(props: {
 	name: string;
 	label: string;
 	placeholder: string;
-	onChange: (value: string) => undefined;
+	onChange: (value: string) => void;
 }) {
 	const id = useId();
 	return (
