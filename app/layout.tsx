@@ -29,13 +29,16 @@ export default function RootLayout({
 				className={`${geistSans.variable} ${geistMono.variable} antialiased
 				bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]`}
 			>
-				<div className="w-screen h-screen flex justify-center items-center">
+				<div className="w-screen h-screen flex flex-col gap-6 justify-center items-center">
 					<div
 						className="w-2/3 p-12 flex flex-col justify-center items-center gap-8
 					bg-white border-2 border-slate-50 drop-shadow-lg"
 					>
 						{children}
 					</div>
+					<p className="text-neutral-700">
+						AUTHORSHIP: {process.env.AUTHORSHIP}
+					</p>
 				</div>
 			</body>
 		</html>
